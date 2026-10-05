@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinky Sheth // Portfolio</title>
+    <style>
+      :root {
+        --bg: #f6efe7;
+        --bg-2: #eadbbc;
+        --panel: #fffaf2;
+        --panel-strong: #f1e6d7;
+        --cyan: #6d8d8c;
+        --pink: #d88f7a;
+        --lime: #9aad7e;
+        --yellow: #d7b56b;
+        --red: #c77a6e;
+        --purple: #a08cc0;
+        --white: #2d2a2a;
+        --muted: #5f554f;
+        --line: rgba(109, 141, 140, 0.22);
+        --shadow: 0 0 0 3px #2d2a2a, 0 0 0 6px rgba(109, 141, 140, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Trebuchet MS", "Verdana", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 35%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+        color: var(--white);
+        min-height: 100vh;
+        letter-spacing: 0.02em;
+        line-height: 1.6;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            to bottom,
+            rgba(45, 42, 45, 0.02),
+            rgba(45, 42, 45, 0.02) 1px,
+            transparent 1px,
+            transparent 6px
+          ),
+          repeating-linear-gradient(
+            to right,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.12) 1px,
+            transparent 1px,
+            transparent 4px
+          );
+        pointer-events: none;
+        opacity: 1;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .pixel-panel {
+        background: #fffaf2;
+        border: 3px solid var(--cyan);
+        box-shadow: 0 0 0 3px #2d2a2a, 5px 5px 0 rgba(216, 143, 122, 0.2);
+        position: relative;
+        border-radius: 0;
+      }
+
+      .pixel-panel::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px solid rgba(45, 42, 45, 0.14);
+        pointer-events: none;
+        transform: rotate(-0.3deg);
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 250, 242, 0.96);
+        border-bottom: 3px solid var(--cyan);
+        box-shadow: 0 4px 0 rgba(109, 141, 140, 0.18);
+      }
+
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 72px;
+      }
+
+      .brand {
+        font-weight: 800;
+        font-size: 1.15rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--pink);
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.04);
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .nav a {
+        padding: 8px 12px;
+        border: 2px solid transparent;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        transition: 0.2s ease;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        border-color: var(--cyan);
+        color: var(--white);
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06);
+      }
+
+      .hero {
+        padding: 72px 0 40px;
+      }
+
+      .hero-panel {
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 20px;
+        padding: 24px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 12px;
+        background: rgba(217, 146, 123, 0.12);
+        border: 2px solid var(--pink);
+        color: var(--pink);
+        font-size: 0.73rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.6rem, 6vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--white);
+        text-shadow: 4px 4px 0 rgba(217, 146, 123, 0.66), 0 0 0 rgba(0, 0, 0, 0);
+      }
+
+      .subtitle {
+        font-size: clamp(1.05rem, 2vw, 1.4rem);
+        color: var(--cyan);
+        margin: 0 0 22px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+        margin-bottom: 28px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 14px 20px;
+        border: 2px solid var(--cyan);
+        background: rgba(45, 106, 93, 0.08);
+        color: var(--white);
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        font-weight: 700;
+        font-size: 0.76rem;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+        transition: transform 0.15s ease;
+      }
+
+      .btn:hover,
+      .btn:focus-visible {
+        transform: translate(-1px, -1px);
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+      }
+
+      .btn.primary {
+        background: var(--lime);
+        border-color: var(--lime);
+        color: #1d1b18;
+        text-shadow: none;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 2px solid var(--lime);
+        background: rgba(184, 255, 90, 0.08);
+        color: var(--lime);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--lime);
+        box-shadow: 0 0 10px rgba(184, 255, 90, 0.8);
+      }
+
+      .side-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px;
+        background: rgba(18, 14, 10, 0.78);
+        border: 2px solid var(--yellow);
+      }
+
+      .mini-label {
+        color: var(--yellow);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.7rem;
+        margin-bottom: 6px;
+      }
+
+      .terminal {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px solid rgba(244, 233, 199, 0.18);
+        padding: 12px 10px;
+        font-family: "Courier New", monospace;
+        color: var(--cyan);
+        font-size: 0.75rem;
+        line-height: 1.7;
+      }
+
+      .terminal strong {
+        color: var(--yellow);
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      .section-kicker {
+        margin: 0 0 8px;
+        color: var(--pink);
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin: 0;
+      }
+
+      .section-note {
+        color: var(--muted);
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+      }
+
+      .about-copy,
+      .focus-box,
+      .contact-panel,
+      .project-card,
+      .timeline-item {
+        background: rgba(255, 250, 245, 0.96);
+        border: 2px solid rgba(45, 42, 45, 0.12);
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.02);
+      }
+
+      .about-copy {
+        padding: 22px 24px;
+      }
+
+      .about-copy p {
+        margin: 0;
+        font-size: 1.04rem;
+        color: var(--muted);
+      }
+
+      .focus-box {
+        padding: 22px 20px;
+      }
+
+      .focus-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .focus-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--white);
+      }
+
+      .focus-item .bullet {
+        width: 10px;
+        height: 10px;
+        background: var(--yellow);
+        margin-top: 7px;
+        box-shadow: 0 0 10px rgba(255, 230, 109, 0.8);
+      }
+
+      .timeline {
+        position: relative;
+        margin-top: 30px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--pink), var(--cyan));
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-left: 42px;
+        padding: 20px 18px 18px;
+        margin-bottom: 18px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -31px;
+        top: 22px;
+        width: 18px;
+        height: 18px;
+        background: var(--lime);
+        border: 3px solid #0a0a18;
+        box-shadow: 0 0 0 3px rgba(184, 255, 90, 0.4);
+      }
+
+      .timeline-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+
+      .role {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--white);
+      }
+
+      .company {
+        color: var(--cyan);
+        font-size: 0.88rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .date {
+        color: var(--yellow);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .timeline-item p {
+        margin: 0 0 10px;
+        color: var(--muted);
+      }
+
+      .timeline-item ul {
+        display: grid;
+        gap: 8px;
+        padding-left: 18px;
+        list-style: square;
+        color: var(--white);
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .filter-btn {
+        cursor: pointer;
+        border: 2px solid var(--cyan);
+        background: rgba(126, 249, 255, 0.06);
+        color: var(--white);
+        padding: 9px 12px;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: 0.2s ease;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: var(--cyan);
+        color: #0a0a18;
+        box-shadow: 0 0 14px rgba(126, 249, 255, 0.36);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .project-card {
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+        min-height: 220px;
+      }
+
+      .project-card.hidden {
+        display: none;
+      }
+
+      .project-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -25% -35% 40%;
+        height: 110px;
+        background: rgba(142, 230, 109, 0.05);
+      }
+
+      .project-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .project-name {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .project-tag {
+        padding: 5px 7px;
+        border: 2px solid var(--pink);
+        color: var(--pink);
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .project-card p {
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .chip {
+        display: inline-block;
+        padding: 5px 7px;
+        border: 1px solid rgba(244, 233, 199, 0.18);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--white);
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .project-impact {
+        border-top: 1px solid rgba(244, 233, 199, 0.18);
+        padding-top: 10px;
+        color: var(--yellow);
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .skills-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .skill-box {
+        background: #fffaf2;
+        border: 2px solid var(--cyan);
+        box-shadow: 0 0 0 2px rgba(45, 42, 42, 0.08);
+        padding: 18px;
+      }
+
+      .skill-box h3 {
+        margin: 0 0 12px;
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--pink);
+      }
+
+      .skill-box ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .skill-box li {
+        padding: 7px 9px;
+        background: var(--panel-strong);
+        border: 1px solid rgba(45, 42, 42, 0.15);
+        font-size: 0.7rem;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+
+      .contact-panel {
+        padding: 18px 20px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .contact-copy p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .contact-links a {
+        display: inline-block;
+        padding: 9px 12px;
+        border: 2px solid var(--pink);
+        color: var(--white);
+        font-size: 0.72rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        padding: 18px 0 60px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      @media (max-width: 820px) {
+        .hero-panel,
+        .about-grid,
+        .contact-panel,
+        .projects-grid,
+        .skills-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        .nav {
+          width: 100%;
+        }
+
+        h1 {
+          font-size: clamp(2.3rem, 11vw, 4rem);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Dinky Sheth</div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-panel pixel-panel">
+          <div>
+            <div class="eyebrow">// developer //</div>
+            <h1>Dinky<br />Sheth</h1>
+            <p class="subtitle">Building simple experiences for complex work</p>
+            <p class="hero-copy">
+              I design and build small interactive experiences while learning how different programming languages work together.
+              My work combines creative thinking with practical problem-solving, and I’m especially interested in game development,
+              interactive systems, and experiences that feel immersive and memorable.
+            </p>
+            <div class="cta-row">
+              <a class="btn primary" href="#projects">View work</a>
+              <a class="btn" href="#contact">Contact</a>
+            </div>
+            <div class="status"><span class="status-dot"></span> Game-dev direction active</div>
+          </div>
+
+          <aside class="side-card">
+            <div>
+              <div class="mini-label">Current focus</div>
+              <div class="terminal">
+                <div><strong>ROLE:</strong> Developer</div>
+                <div><strong>INTEREST:</strong> Game design</div>
+                <div><strong>STACK:</strong> Python / HTML / CSS / JS</div>
+                <div><strong>GOAL:</strong> Build immersive experiences</div>
+              </div>
+            </div>
+            <div>
+              <div class="mini-label">Quick note</div>
+              <div class="terminal">
+                <div>playable ideas</div>
+                <div>small tools</div>
+                <div>interactive stories</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">01 // About</p>
+              <h2>Who I am</h2>
+            </div>
+            <div class="section-note">Independent work</div>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-copy">
+              <p>
+                I build small interactive experiences designed to feel clear, thoughtful, and memorable. My work blends creativity,
+                design, and code, with a focus on playful systems, motion, and emotional storytelling. I enjoy experimenting with
+                different tools and languages to understand how they work together and how small design choices can shape the feeling
+                of an experience.
+              </p>
+            </div>
+
+            <div class="focus-box">
+              <div class="mini-label">Focus</div>
+              <ul class="focus-list">
+                <li class="focus-item"><span class="bullet"></span><span>Interactive prototypes</span></li>
+                <li class="focus-item"><span class="bullet"></span><span>Immersive UX and interface design</span></li>
+                <li class="focus-item"><span class="bullet"></span><span>Game dev interest and design thinking</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">02 // Timeline</p>
+              <h2>Work & projects</h2>
+            </div>
+            <div class="section-note">Selected history</div>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div class="role">Developer</div>
+                <div class="company">Independent projects</div>
+                <div class="date">2026 — now</div>
+              </div>
+              <p>
+                Building small interactive experiences and experiments focused on design, motion, storytelling, and playful systems.
+              </p>
+              <ul>
+                <li>Exploring how code and design can create personality and atmosphere.</li>
+                <li>Developing prototypes with an eye toward game-like interaction and user engagement.</li>
+                <li>Working across Python, HTML, CSS, and JavaScript to create interactive builds.</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div class="role">Desktop Pet</div>
+                <div class="company">Python prototype</div>
+                <div class="date">2026</div>
+              </div>
+              <p>
+                A small companion designed to keep the user company while they work, with simple movement, personality, and visual feedback.
+              </p>
+              <ul>
+                <li>Created a desktop companion using Python with an emphasis on behavior and presence.</li>
+                <li>Focused on making the character feel alive without overwhelming the user.</li>
+                <li>Designed the project as a prototype for interactive character systems and player-like engagement.</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-top">
+                <div class="role">The Written Word</div>
+                <div class="company">Web experience</div>
+                <div class="date">2026</div>
+              </div>
+              <p>
+                A nostalgic website built around sending and receiving letters, mixing old-money visuals with motion-driven interactions.
+              </p>
+              <ul>
+                <li>Built using HTML, CSS, and JavaScript to create an atmospheric storytelling experience.</li>
+                <li>Used layered animation and vintage styling to reinforce emotion and tone.</li>
+                <li>Explored how interface polish and motion can shape the feeling of a digital narrative.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">03 // Projects</p>
+              <h2>Selected work</h2>
+            </div>
+            <div class="section-note">Filter by type</div>
+          </div>
+
+          <div class="filters" aria-label="Project filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="game">Game dev</button>
+            <button class="filter-btn" data-filter="interaction">Interaction</button>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card" data-category="python interaction game">
+              <div class="project-top">
+                <div class="project-name">Desktop Pet</div>
+                <div class="project-tag">Python</div>
+              </div>
+              <p>
+                A small desktop companion built to keep the user company while they work. It focuses on personality, motion, and a subtle sense of life.
+              </p>
+              <div class="project-meta">
+                <span class="chip">Python</span>
+                <span class="chip">Companion</span>
+                <span class="chip">Interaction</span>
+              </div>
+              <div class="project-impact">A character-focused prototype exploring presence and engaging feedback.</div>
+            </article>
+
+            <article class="project-card" data-category="web interaction">
+              <div class="project-top">
+                <div class="project-name">The Written Word</div>
+                <div class="project-tag">Web</div>
+              </div>
+              <p>
+                A website for writing letters with an old-money aesthetic, soft animations, and a nostalgic sense of sending and receiving correspondence.
+              </p>
+              <div class="project-meta">
+                <span class="chip">HTML</span>
+                <span class="chip">CSS</span>
+                <span class="chip">JavaScript</span>
+              </div>
+              <div class="project-impact">A storytelling experience using motion and atmosphere to create emotion.</div>
+            </article>
+
+            <article class="project-card" data-category="python web tool">
+              <div class="project-top">
+                <div class="project-name">Offline File Converter</div>
+                <div class="project-tag">Ongoing</div>
+              </div>
+              <p>
+                A local file conversion tool inspired by online services like iLovePDF, designed to convert files offline without depending on a web app.
+              </p>
+              <div class="project-meta">
+                <span class="chip">Python</span>
+                <span class="chip">Files</span>
+                <span class="chip">Tooling</span>
+              </div>
+              <div class="project-impact">An ongoing project focused on utility, automation, and practical software design.</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">04 // Skills</p>
+              <h2>Toolbox</h2>
+            </div>
+            <div class="section-note">What I build with</div>
+          </div>
+
+          <div class="skills-wrap">
+            <div class="skill-box">
+              <h3>Languages</h3>
+              <ul>
+                <li>Python</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+            </div>
+
+            <div class="skill-box">
+              <h3>Design</h3>
+              <ul>
+                <li>UI design</li>
+                <li>UX thinking</li>
+                <li>Visual polish</li>
+                <li>Storytelling</li>
+              </ul>
+            </div>
+
+            <div class="skill-box">
+              <h3>Game focus</h3>
+              <ul>
+                <li>Playability</li>
+                <li>Interaction</li>
+                <li>Character feel</li>
+                <li>Atmosphere</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">05 // Contact</p>
+              <h2>Let’s build something</h2>
+            </div>
+            <div class="section-note">Open to opportunities</div>
+          </div>
+
+          <div class="contact-panel pixel-panel">
+            <div class="contact-copy">
+              <p>
+                I’m looking to keep learning, build more interactive experiences, and grow toward game development work.
+                If you’d like to collaborate, talk about projects, or explore creative opportunities, I’d love to connect.
+              </p>
+            </div>
+            <div class="contact-links">
+              <a href="mailto:dinkysheth19@gmail.com">Email</a>
+              <a href="https://www.linkedin.com/in/dinky-sheth" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://github.com/DinkySheth" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Dinky Sheth // Developer // Game-dev focused
+    </footer>
+
+    <script>
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+
+          filterButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
+
+          projectCards.forEach((card) => {
+            const categories = card.dataset.category.split(' ');
+            const shouldShow = filter === 'all' || categories.includes(filter);
+            card.classList.toggle('hidden', !shouldShow);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
